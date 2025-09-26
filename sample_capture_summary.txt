@@ -1,0 +1,1 @@
+Observation: Host 192.168.56.101 sent 12 SYN packets to 192.168.56.10 over 5 seconds (ports: 22, 80, 445, ...). Filter used: tcp.flags.syn==1 && tcp.flags.ack==0. Conclusion: SYN port scan detected (reconnaissance).
