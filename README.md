@@ -36,3 +36,9 @@ This small lab demonstrates basic network traffic analysis using **Wireshark** i
 ## Sample findings (sanitized)
 See `sample_capture_summary.txt` for a short extract showing common protocol lines and an example of suspicious activity (SYN scan). The sample includes lines like:
 
+## Sample Finding: SYN Scan Detection
+
+The following screenshot shows captured TCP SYN packets from host `10.28.70.131` to multiple destinations. Using the filter `tcp.flags.syn == 1 && tcp.flags.ack == 0`, we observed repeated SYNs with retransmissions and no completed handshakes. This indicates a **SYN scan**—a reconnaissance technique used to identify open ports and services.
+
+![SYN Scan Screenshot](screenshots/syn_scan_filter.png)
+
