@@ -1,31 +1,38 @@
-# Penetration Testing Simulation
+# Wireshark-Traffic-Analysis
 
 ## Overview
-This project demonstrates a penetration testing simulation conducted in a controlled lab environment.  
-The goal was to identify vulnerabilities, exploit them safely, and provide recommendations for remediation.  
+This small lab demonstrates basic network traffic analysis using **Wireshark** in a controlled environment. The goal is to capture packets, identify common protocols and suspicious patterns, and document findings. This repo is intended for educational use in an isolated lab only.
+
+**Note:** Do not capture traffic from networks you do not own or have explicit permission to test.
+
+---
 
 ## Tools Used
-- **Kali Linux** – Testing environment  
-- **Nmap** – Network scanning and host discovery  
-- **Metasploit Framework** – Exploit development and vulnerability testing  
-- **Burp Suite** – Web application vulnerability scanning  
-- **Wireshark** – Packet capture and analysis  
+- **Wireshark** – packet capture and analysis
+- **tcpdump** – optional command-line packet capture
+- **Kali Linux / Ubuntu** – where captures were performed
 
-## Project Steps
-1. **Reconnaissance**
-   - Used Nmap to scan for open ports and services.
-   - Identified potential vulnerabilities in web and network services.
+---
 
-2. **Exploitation**
-   - Tested known vulnerabilities using Metasploit in a safe environment.
-   - Verified exploitation success while avoiding system damage.
+## Files in this repo
+- `README.md` — this document  
+- `sample_capture_summary.txt` — short, sanitized text summary of a sample capture (included below)  
+- `screenshots/` — place screenshots of Wireshark views here (optional)
 
-3. **Web Application Testing**
-   - Scanned with Burp Suite to identify SQL injection and XSS risks.
+---
 
-4. **Analysis & Reporting**
-   - Captured traffic with Wireshark to confirm exploit traffic.
-   - Documented findings and suggested mitigations.
+## How to reproduce (lab steps)
+1. Create an isolated network with at least two VMs (attacker and target).  
+2. Start a packet capture in Wireshark on the lab network interface.  
+3. Generate benign traffic (browsing, ping) and a small simulated suspicious event (e.g., repeated ICMP pings or a port scan from attacker VM).  
+4. Stop capture and save the `.pcap` file.  
+5. Open the capture in Wireshark and filter, for example:  
+   - `ip.addr == 192.168.56.101` (filter by host)  
+   - `tcp.flags.syn == 1 and tcp.flags.ack == 0` (show SYN scans)  
+6. Export a screenshot of the packet list and add it to `screenshots/`.
 
-## Sample Output
-Example **Nmap Scan**:
+---
+
+## Sample findings (sanitized)
+See `sample_capture_summary.txt` for a short extract showing common protocol lines and an example of suspicious activity (SYN scan). The sample includes lines like:
+
